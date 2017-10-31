@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Warehouse_Management.Views.CreateItemPage" Title="Create item">
+    <StackLayout>
+        <StackLayout x:Name="itemStack">
+            <Label Text="Name" />
+            <Entry Text="{Binding Name}" FontSize="Medium" />
+            <Label Text="Count" />
+            <Entry Text="{Binding Count}" FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <Button Text="Save" Command="{Binding ListViewModel.SaveItemCommand}" CommandParameter="{Binding}" />
+            <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>
