@@ -12,8 +12,6 @@ namespace Warehouse_Management.ViewModels
     {
         public ObservableCollection<ItemViewModel> Items { get; set; }
 
-        private int _indexOfEditingItem;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand CreateItemCommand { protected set; get; }
@@ -22,6 +20,7 @@ namespace Warehouse_Management.ViewModels
         public ICommand AcceptEditItemCommand { protected set; get; }
         public ICommand SaveItemCommand { protected set; get; }
         public ICommand BackCommand { protected set; get; }
+
         ItemViewModel selectedItem;
 
         public INavigation Navigation { get; set; }
@@ -29,6 +28,10 @@ namespace Warehouse_Management.ViewModels
         public ItemsListViewModel()
         {
             Items = new ObservableCollection<ItemViewModel>();
+            foreach (var item in App.Database.GetItems())
+            {
+                Items.Add(item);
+            }
             CreateItemCommand = new Command(CreateItem);
             EditItemCommand = new Command(EditItem);
             AcceptEditItemCommand = new Command(AcceptEditItem);
@@ -52,7 +55,12 @@ namespace Warehouse_Management.ViewModels
             }
         }
 
-        protected void OnPropertyChanged(string propName)
+        private void Appearing()
+        {
+            //
+        }
+
+        private void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
@@ -66,12 +74,13 @@ namespace Warehouse_Management.ViewModels
         {
             Navigation.PopAsync();
         }
-
+            
         private void SaveItem(object ItemObject)
         {
             ItemViewModel item = ItemObject as ItemViewModel;
             if (item != null && item.IsValid)
             {
+                App.Database.SaveItem(item);
                 Items.Add(item);
             }
             Back();
@@ -82,7 +91,8 @@ namespace Warehouse_Management.ViewModels
             ItemViewModel item = ItemObject as ItemViewModel;
             if (item != null)
             {
-                    Items.Remove(item);
+                App.Database.DeleteItem(item);
+                Items.Remove(item);
             }
             Back();
         }

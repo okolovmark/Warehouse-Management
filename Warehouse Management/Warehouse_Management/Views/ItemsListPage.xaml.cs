@@ -1,4 +1,5 @@
-﻿using Warehouse_Management.ViewModels;
+﻿using System.Collections.ObjectModel;
+using Warehouse_Management.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,4 +14,5 @@ namespace Warehouse_Management.Views
             BindingContext = new ItemsListViewModel() { Navigation = this.Navigation };
         }
     }
+
 }

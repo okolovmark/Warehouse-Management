@@ -33,7 +33,7 @@
 
                                 <Label Text="{Binding Name}" FontSize="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"/>
                                 <Label Text="{Binding Count}" FontSize="Small" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"/>
-                                
+
                             </Grid>
                         </ViewCell.View>
                     </ViewCell>
@@ -41,5 +41,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-
 </ContentPage>
