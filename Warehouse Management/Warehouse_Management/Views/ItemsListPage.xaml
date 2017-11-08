@@ -5,7 +5,7 @@
     <StackLayout>
         <Button Text="Add new item" Command="{Binding CreateItemCommand}" />
         <ListView x:Name="itemsList" ItemsSource="{Binding Items}"
-                  SelectedItem="{Binding SelectedFriend, Mode=TwoWay}" HasUnevenRows="True">
+                  SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -13,8 +13,6 @@
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
                                       Command="{Binding ListViewModel.DeleteItemCommand}" CommandParameter="{Binding}" />
-                            <MenuItem Text="Edit"
-                                      Command="{Binding ListViewModel.EditItemCommand}" CommandParameter="{Binding}" />
                         </ViewCell.ContextActions>
 
                         <ViewCell.View>
@@ -32,7 +30,9 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Text="{Binding Name}" FontSize="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"/>
-                                <Label Text="{Binding Count}" FontSize="Small" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4"/>
+                                <Label Text="{Binding Count}" FontSize="Small" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                <Label Text="Id: " FontSize="Small" Grid.Column="2" Grid.Row="1" HorizontalTextAlignment="End"/>
+                                <Label Text="{Binding Id}" FontSize="Small" Grid.Column="3" Grid.Row="1"/>
 
                             </Grid>
                         </ViewCell.View>

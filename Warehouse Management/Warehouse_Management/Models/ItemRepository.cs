@@ -9,35 +9,36 @@ namespace Warehouse_Management.Models
 {
     public class ItemRepository
     {
-        SQLiteConnection database;
+        SQLiteConnection _database;
 
         public ItemRepository(string filename)
         {
             var sqlitePlatform = DependencyService.Get<ISQLite>().GetDatabasePlatform();
             var databasePath = DependencyService.Get<ISQLite>().GetDatabasePath(filename);
-            database = new SQLiteConnection(sqlitePlatform, databasePath);
-            database.CreateTable<ItemViewModel>();
+            _database = new SQLiteConnection(sqlitePlatform, databasePath);
+            _database.CreateTable<Item>();
         }
-        public IEnumerable<ItemViewModel> GetItems()
+        public IEnumerable<Item> GetItems()
         {
-            return (from i in database.Table<ItemViewModel>() select i).ToList();
+            return (from i in _database.Table<Item>() select i).ToList();
 
         }
-        public ItemViewModel GetItem(int id)
+        public Item GetItem(int id)
         {
-            return database.Get<ItemViewModel>(id);
+            return _database.Get<Item>(id);
         }
-        public int DeleteItem(ItemViewModel item)
+        public int DeleteItem(int id)
         {
-            return database.Delete(item);
+            return _database.Delete<Item>(id);
         }
-        public int UpdateItem(ItemViewModel item)
+        public int UpdateItem(Item item)
         {
-            return database.Update(item);
+            _database.Update(item);
+            return item.Id;
         }
-        public int SaveItem(ItemViewModel item)
+        public int SaveItem(Item item)
         {
-            return database.Insert(item);
+            return _database.Insert(item);
         }
     }
 }

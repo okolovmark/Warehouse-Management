@@ -5,13 +5,11 @@ using Warehouse_Management.Models;
 
 namespace Warehouse_Management.ViewModels
 {
-    [Table("Items")]
     public class ItemViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ItemsListViewModel lvm;
 
-        [Ignore]
         public Item Item { get; private set; }
 
         public ItemViewModel()
@@ -24,7 +22,6 @@ namespace Warehouse_Management.ViewModels
             Item = new Item(name, count);
         }
 
-        [Ignore]
         public ItemsListViewModel ListViewModel
         {
             get { return lvm; }
@@ -64,7 +61,19 @@ namespace Warehouse_Management.ViewModels
             }
         }
 
-        [Ignore]
+        public int Id
+        {
+            get { return Item.Id; }
+            set
+            {
+                if (Item.Id != value)
+                {
+                    Item.Id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+
         public bool IsValid
         {
             get

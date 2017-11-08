@@ -8,6 +8,11 @@ namespace Warehouse_Management.Views
     public partial class EditItemPage : ContentPage
     {
         public ItemViewModel ViewModel { get; private set; }
+
+        public EditItemPage()
+        {
+            InitializeComponent();
+        }
         public EditItemPage(ItemViewModel vm)
         {
             InitializeComponent();

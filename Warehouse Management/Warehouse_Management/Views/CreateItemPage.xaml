@@ -8,6 +8,7 @@
             <Entry Text="{Binding Name}" FontSize="Medium" />
             <Label Text="Count" />
             <Entry Text="{Binding Count}" FontSize="Medium" />
+           
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <Button Text="Save" Command="{Binding ListViewModel.SaveItemCommand}" CommandParameter="{Binding}" />
