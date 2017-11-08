@@ -9,25 +9,24 @@ namespace Warehouse_Management
     {
         public const string DATABASE_NAME = "Items2.db";
 
-        public static ItemRepository database;
-        public static ItemRepository id;
+        private static ItemRepository database;
 
-        public static int Id
-        {
-            get
-            {
-                //App.Current.Properties.Remove("id");
-                object id = "";
-                if (App.Current.Properties.TryGetValue("id", out id))
-                {
-                    string temp1 = (string) id;
-                    int temp2 = Int32.Parse(temp1);
-                    return temp2;
-                }
-                App.Current.Properties.Add("id", "1");
-                return Int32.Parse(App.Current.Properties["id"] as string);
-            }
-        }
+        //public static int Id
+        //{
+        //    get
+        //    {
+        //        //App.Current.Properties.Remove("id");
+        //        object id = "";
+        //        if (App.Current.Properties.TryGetValue("id", out id))
+        //        {
+        //            string temp1 = (string) id;
+        //            int temp2 = Int32.Parse(temp1);
+        //            return temp2;
+        //        }
+        //        App.Current.Properties.Add("id", "1");
+        //        return Int32.Parse(App.Current.Properties["id"] as string);
+        //    }
+        //}
 
         public static ItemRepository Database
         {
@@ -45,23 +44,13 @@ namespace Warehouse_Management
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ItemsListPage());
+            MainPage = new NavigationPage(new StartPage());
         }
 
-        protected override void OnStart()
-        {
-            
-        }
+        protected override void OnStart(){}
 
-        protected override void OnSleep()
-        {
+        protected override void OnSleep(){}
 
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
+        protected override void OnResume(){}
     }
 }

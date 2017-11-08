@@ -1,40 +1,45 @@
-﻿using System;
-using Warehouse_Management.Views;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Warehouse_Management.Annotations;
 using Warehouse_Management.Models;
+using Warehouse_Management.Views;
+using Xamarin.Forms;
 
 namespace Warehouse_Management.ViewModels
 {
-   
-    public class ItemsListViewModel : INotifyPropertyChanged
+    public class OrderListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<ItemViewModel> Items { get; }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
-      
+
+        private void OnPropertyChanged( string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public INavigation Navigation { private get; set; }
+        public ObservableCollection<ItemViewModel> OrderItems { get; }
+        private ItemViewModel _selectedItem;
+
         public ICommand DeleteItemCommand { get; }
         public ICommand EditItemCommand { get; }
         public ICommand BackCommand { get; }
 
-        private ItemViewModel _selectedItem;
-
-        public INavigation Navigation { private get; set; }
-
-        public ItemsListViewModel()
+        public OrderListViewModel()
         {
-            Items = new ObservableCollection<ItemViewModel>();
+            OrderItems = new ObservableCollection<ItemViewModel>();
             foreach (var item in App.Database.GetItems())
             {
-                if(item.Bought)
-                    Items.Add(ConvertToItemViewModel(item));
-            }      
+                if (!item.Bought)
+                    OrderItems.Add(ConvertToItemViewModel(item));
+            }
+
             EditItemCommand = new Command(EditItem);
-            DeleteItemCommand = new Command(DeleteItem); 
+            DeleteItemCommand = new Command(DeleteItem);
             BackCommand = new Command(Back);
         }
 
@@ -46,7 +51,7 @@ namespace Warehouse_Management.ViewModels
                               Count = item.Count,
                               Id = item.Id,
                               Bought = item.Bought,
-                              ListViewModel = this
+                              OrderViewModel = this
                           };
             return tempivm;
         }
@@ -72,31 +77,24 @@ namespace Warehouse_Management.ViewModels
                 var tempItem = value;
                 _selectedItem = null;
                 OnPropertyChanged("SelectedItem");
-                Navigation.PushAsync(new EditItemPage(tempItem));
+                Navigation.PushAsync(new EditOrderItemPage(tempItem));
             }
         }
-
-        private void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-
-      
 
         private void Back()
         {
             Navigation.PopAsync();
         }
-            
-       
+
+
 
         private void DeleteItem(object itemObject)
         {
             var item = itemObject as ItemViewModel;
             if (item != null)
             {
-                Items.Remove(item);
-                App.Database.DeleteItem(ConvertToItem(item).Id);   
+                OrderItems.Remove(item);
+                App.Database.DeleteItem(ConvertToItem(item).Id);
             }
         }
 
@@ -105,11 +103,12 @@ namespace Warehouse_Management.ViewModels
             var item = itemObject as ItemViewModel;
             if (item.IsValid)
             {
-                var temp = Items.FirstOrDefault(it => it.Name == item.Name);
-                Items[Items.IndexOf(temp)].Count = item.Count;
+                var temp = OrderItems.FirstOrDefault(it => it.Name == item.Name);
+                OrderItems[OrderItems.IndexOf(temp)].Count = item.Count;
                 App.Database.UpdateItem(ConvertToItem(item));
             }
             Back();
         }
     }
+
 }

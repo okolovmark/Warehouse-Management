@@ -9,6 +9,7 @@ namespace Warehouse_Management.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ItemsListViewModel lvm;
+        private OrderListViewModel ovm;
 
         public Item Item { get; private set; }
 
@@ -17,60 +18,69 @@ namespace Warehouse_Management.ViewModels
             Item = new Item();
         }
 
-        public ItemViewModel(string name, int count)
-        {
-            Item = new Item(name, count);
-        }
-
         public ItemsListViewModel ListViewModel
         {
-            get { return lvm; }
+            get => lvm;
             set
             {
-                if (lvm != value)
-                {
-                    lvm = value;
-                    OnPropertyChanged("ListViewModel");
-                }
+                if (lvm == value) return;
+                lvm = value;
+                OnPropertyChanged("ListViewModel");
+            }
+        }
+
+        public OrderListViewModel OrderViewModel
+        {
+            get => ovm;
+            set
+            {
+                if (ovm == value) return;
+                ovm = value;
+                OnPropertyChanged("OrderViewModel");
             }
         }
 
         public string Name
         {
-            get { return Item.Name; }
+            get => Item.Name;
             set
             {
-                if (Item.Name != value)
-                {
-                    Item.Name = value;
-                    OnPropertyChanged("Name");
-                }
+                if (Item.Name == value) return;
+                Item.Name = value;
+                OnPropertyChanged("Name");
             }
         }
 
         public int Count
         {
-            get { return Item.Count; }
+            get => Item.Count;
             set
             {
-                if (Item.Count != value)
-                {
-                    Item.Count = value;
-                    OnPropertyChanged("Count");
-                }
+                if (Item.Count == value) return;
+                Item.Count = value;
+                OnPropertyChanged("Count");
+            }
+        }
+
+        public bool Bought
+        {
+            get => Item.Bought;
+            set
+            {
+                if (Item.Bought == value) return;
+                Item.Bought = value;
+                OnPropertyChanged("Bought");
             }
         }
 
         public int Id
         {
-            get { return Item.Id; }
+            get => Item.Id;
             set
             {
-                if (Item.Id != value)
-                {
-                    Item.Id = value;
-                    OnPropertyChanged("Id");
-                }
+                if (Item.Id == value) return;
+                Item.Id = value;
+                OnPropertyChanged("Id");
             }
         }
 
@@ -90,7 +100,7 @@ namespace Warehouse_Management.ViewModels
             }
         }
 
-        protected void OnPropertyChanged(string propName)
+        private void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }

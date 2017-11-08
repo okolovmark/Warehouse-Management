@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Warehouse_Management.Views.EditItemPage" Title="Edit item">
+             x:Class="Warehouse_Management.Views.EditOrderItemPage" Title="Edit item">
+
     <StackLayout>
-        <StackLayout x:Name="itemStack">
+        <StackLayout x:Name="item2Stack">
             <Label Text="Name" />
             <Label Text="{Binding Name}" FontSize="Medium" />
             <Label Text="Count" />
@@ -12,9 +13,8 @@
             <Switch IsToggled="{Binding Bought}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <Button Text="Accept" Command="{Binding ListViewModel.EditItemCommand}" CommandParameter="{Binding}" />
-            <Button Text="cancel" Command="{Binding Path=ListViewModel.BackCommand}" />
+            <Button Text="Accept" Command="{Binding OrderViewModel.EditItemCommand}" CommandParameter="{Binding}" />
+            <Button Text="cancel" Command="{Binding Path=OrderViewModel.BackCommand}" />
         </StackLayout>
     </StackLayout>
-
 </ContentPage>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Warehouse_Management.Views.StartPage" Title="Choose section">
+    <StackLayout>
+        <Button Text="Add new item" Command="{Binding CreateItemCommand}" />
+        <Button Text="In stock" Command="{Binding OpenInStockCommand}" />
+        <Button Text="To order" Command="{Binding OpenToOrderCommand}" />
+    </StackLayout>
+</ContentPage>

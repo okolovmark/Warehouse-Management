@@ -5,13 +5,14 @@
     <StackLayout>
         <StackLayout x:Name="itemStack">
             <Label Text="Name" />
-            <Entry Text="{Binding Name}" FontSize="Medium" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
             <Label Text="Count" />
-            <Entry Text="{Binding Count}" FontSize="Medium" />
-           
+            <Entry Text="{Binding Count, Mode=TwoWay}" FontSize="Medium" />
+            <Label Text="Bought" />
+            <Switch IsToggled="{Binding Bought, Mode=TwoWay}"/>
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <Button Text="Save" Command="{Binding ListViewModel.SaveItemCommand}" CommandParameter="{Binding}" />
+            <Button Text="Save" Command="{Binding SaveItemCommand}" CommandParameter="{Binding}"/>
             <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
         </StackLayout>
     </StackLayout>

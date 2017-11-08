@@ -10,13 +10,12 @@ namespace Warehouse_Management.Models
 
         public string Name { get; set; }
         public int Count { get; set; }
+        public bool Bought { get; set; }
 
-        public Item() { }
 
-        public Item(string name, int count)
+        public Item()
         {
-            Name = name;
-            Count = count;
         }
+
     }
 }

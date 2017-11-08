@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Warehouse_Management.Views.ItemsListPage" Title="List Items">
+             x:Class="Warehouse_Management.Views.OrderListPage" Title="Order list">
+
     <StackLayout>
-        
-        <ListView x:Name="itemsList" ItemsSource="{Binding Items}"
+        <ListView x:Name="orderList" ItemsSource="{Binding OrderItems}"
                   SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -12,7 +12,7 @@
 
                         <ViewCell.ContextActions>
                             <MenuItem Text="Delete"
-                                      Command="{Binding ListViewModel.DeleteItemCommand}" CommandParameter="{Binding}" />
+                                      Command="{Binding OrderViewModel.DeleteItemCommand}" CommandParameter="{Binding}" />
                         </ViewCell.ContextActions>
 
                         <ViewCell.View>
@@ -41,4 +41,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
+
 </ContentPage>
