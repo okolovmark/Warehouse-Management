@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using ExpressMapper;
 using Warehouse_Management.Models;
 using Xamarin.Forms;
 
@@ -75,11 +76,7 @@ namespace Warehouse_Management.ViewModels
 
         private void SaveItem(object itemObject)
         {
-            var  temp = itemObject as CreateItemViewModel;
-            var item = new ItemViewModel();
-            item.Name = temp.Name;
-            item.Count = temp.Count;
-            item.Bought = temp.Bought;
+            var item = Mapper.Map<CreateItemViewModel, ItemViewModel>(itemObject as CreateItemViewModel);
             if (item != null && item.IsValid)
             {
                 App.Database.SaveItem(ConvertToItem(item));
