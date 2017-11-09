@@ -13,7 +13,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <Button Text="Save" Command="{Binding SaveItemCommand}" CommandParameter="{Binding}"/>
-            <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" />
+            <Button Text="Back" Command="{Binding Path=BackCommand}" />
         </StackLayout>
     </StackLayout>
 

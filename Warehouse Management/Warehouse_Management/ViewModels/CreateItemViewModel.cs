@@ -48,10 +48,12 @@ namespace Warehouse_Management.ViewModels
         }
 
         public ICommand SaveItemCommand { get; }
+        public ICommand BackCommand { get; }
         public INavigation Navigation { private get; set; }
         public CreateItemViewModel()
         {
             SaveItemCommand = new Command(SaveItem);
+            BackCommand = new Command(Back);
         }
 
         private static Item ConvertToItem(ItemViewModel ivm)
@@ -82,7 +84,13 @@ namespace Warehouse_Management.ViewModels
             {
                 App.Database.SaveItem(ConvertToItem(item));
             }
+            Back();
+        }
+
+        private void Back()
+        {
             Navigation.PopAsync();
         }
+
     }
 }

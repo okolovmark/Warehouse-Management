@@ -1,9 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Warehouse_Management.Annotations;
 using Warehouse_Management.Models;
 using Warehouse_Management.Views;
 using Xamarin.Forms;
@@ -12,11 +10,10 @@ namespace Warehouse_Management.ViewModels
 {
     public class OrderListViewModel : INotifyPropertyChanged
     {
-        
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private void OnPropertyChanged( string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -87,7 +84,6 @@ namespace Warehouse_Management.ViewModels
         }
 
 
-
         private void DeleteItem(object itemObject)
         {
             var item = itemObject as ItemViewModel;
@@ -110,5 +106,4 @@ namespace Warehouse_Management.ViewModels
             Back();
         }
     }
-
 }
